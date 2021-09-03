@@ -165,7 +165,7 @@ const teachers = {
     자율: "HR",
   },
   "2-3": {
-    물리Ⅰ: "물리(전)",
+    물리: "물리(전)",
     공수: "공수(이)",
     빅데: "빅데(하)",
     응화: "응화(마)",
@@ -181,7 +181,7 @@ const teachers = {
     자율: "HR",
   },
   "2-4": {
-    물리Ⅰ: "물리(전)",
+    물리: "물리(전)",
     공수: "공수(이)",
     빅데: "빅데(하)",
     응화: "응화(마)",
@@ -197,7 +197,7 @@ const teachers = {
     자율: "HR",
   },
   "2-5": {
-    물리Ⅰ: "물리(전)",
+    물리: "물리(전)",
     공수: "공수(이)",
     정보보호: "정보관(이)",
     정통: "정통(박)",
@@ -213,7 +213,7 @@ const teachers = {
     자율: "HR",
   },
   "2-6": {
-    물리Ⅰ: "물리(전)",
+    물리: "물리(전)",
     공수: "공수(이)",
     정보보호: "정보관(이)",
     정통: "정통(박)",
@@ -232,10 +232,7 @@ const teachers = {
 
 let todaySchedule = [];
 const scheduleFunction = () => {
-  if (new Date().getDay() >= 5 || new Date().getDay() == 0) {
-    todaySchedule = ["No Schedule"];
-    return;
-  }
+
   let classData = localStorage.getItem("class").split("-");
   fetch(`https://api.dimigo.in/timetable/weekly/grade/${classData[0]}/class/${classData[1]}`, {
     method: "GET",
@@ -243,9 +240,7 @@ const scheduleFunction = () => {
     .then((data) => data.json())
     .then((data) => {
       todaySchedule = data.timetable[new Date().getDay() - 1].sequence;
-      if (todaySchedule[0] == "쉬는 날") {
-        todaySchedule = ["No Schedule"];
-      } else {
+      {
         for (let i = 0; i <= 6; i++) {
           if (todaySchedule[i] == undefined) {
             todaySchedule[i] = "";
@@ -382,33 +377,29 @@ const loop = () => {
     let inner = "";
     if (todaySchedule[i] == "정처(이)" || todaySchedule[i] == "광고(정)") {
       elements[i].style.cursor = "default";
-      inner = `<span class="classSelect ${localStorage.getItem("1-a-1") == "true"}" onclick="classClicked('1-a-1', true, ${i})">정처(이)</span> | <span class="classSelect ${
-        localStorage.getItem("1-a-1") != "true"
-      }" onclick="classClicked('1-a-1', false, ${i})">광고(정)</span>`;
+      inner = `<span class="classSelect ${localStorage.getItem("1-a-1") == "true"}" onclick="classClicked('1-a-1', true, ${i})">정처(이)</span> | <span class="classSelect ${localStorage.getItem("1-a-1") != "true"
+        }" onclick="classClicked('1-a-1', false, ${i})">광고(정)</span>`;
       if (localStorage.getItem("1-a-1")) {
         todaySchedule[i] = localStorage.getItem("1-a-1") == "true" ? "정처(이)" : "광고(정)";
       }
     } else if (todaySchedule[i] == "플밍(임)" || todaySchedule[i] == "음악(이)") {
       elements[i].style.cursor = "default";
-      inner = `<span class="classSelect ${localStorage.getItem("1-a-2") == "true"}" onclick="classClicked('1-a-2', true, ${i})">플밍(임)</span> | <span class="classSelect ${
-        localStorage.getItem("1-a-2") != "true"
-      }" onclick="classClicked('1-a-2', false, ${i})">음악(이)</span>`;
+      inner = `<span class="classSelect ${localStorage.getItem("1-a-2") == "true"}" onclick="classClicked('1-a-2', true, ${i})">플밍(임)</span> | <span class="classSelect ${localStorage.getItem("1-a-2") != "true"
+        }" onclick="classClicked('1-a-2', false, ${i})">음악(이)</span>`;
       if (localStorage.getItem("1-a-2")) {
         todaySchedule[i] = localStorage.getItem("1-a-2") == "true" ? "플밍(임)" : "음악(이)";
       }
     } else if (todaySchedule[i] == "응화(마)" || todaySchedule[i] == "정보관(이)") {
       elements[i].style.cursor = "default";
-      inner = `<span class="classSelect ${localStorage.getItem("1-b") == "true"}" onclick="classClicked('1-b', true, ${i})">응화(마)</span> | <span class="classSelect ${
-        localStorage.getItem("1-b") != "true"
-      }" onclick="classClicked('1-b', false, ${i})">정보관(이)</span>`;
+      inner = `<span class="classSelect ${localStorage.getItem("1-b") == "true"}" onclick="classClicked('1-b', true, ${i})">응화(마)</span> | <span class="classSelect ${localStorage.getItem("1-b") != "true"
+        }" onclick="classClicked('1-b', false, ${i})">정보관(이)</span>`;
       if (localStorage.getItem("1-b")) {
         todaySchedule[i] = localStorage.getItem("1-b") == "true" ? "응화(마)" : "정보관(이)";
       }
     } else if (todaySchedule[i] == "빅데(하)" || todaySchedule[i] == "정통(박)") {
       elements[i].style.cursor = "default";
-      inner = `<span class="classSelect ${localStorage.getItem("2") == "true"}" onclick="classClicked('2', true, ${i})">빅데(하)</span> | <span class="classSelect ${
-        localStorage.getItem("2") != "true"
-      }" onclick="classClicked('2', false, ${i})">정통(박)</span>`;
+      inner = `<span class="classSelect ${localStorage.getItem("2") == "true"}" onclick="classClicked('2', true, ${i})">빅데(하)</span> | <span class="classSelect ${localStorage.getItem("2") != "true"
+        }" onclick="classClicked('2', false, ${i})">정통(박)</span>`;
       if (localStorage.getItem("2")) {
         todaySchedule[i] = localStorage.getItem("2") == "true" ? "빅데(하)" : "정통(박)";
       }
